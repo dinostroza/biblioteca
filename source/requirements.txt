@@ -1,2 +1,0 @@
-Django==1.11
-django-isbn-field==0.5.2
