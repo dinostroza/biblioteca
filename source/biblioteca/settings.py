@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 	#Application Apps
+	'user',
 	'books',
 	'authors',
 	'storage',
@@ -88,8 +89,8 @@ DATABASES = {
 		'NAME': SECRET_DB_NAME,
 		'USER': SECRET_DB_USER,
 		'PASSWORD': SECRET_DB_PASSWORD,
-		'HOST': SECRET_DB_HOST
-		#'PORT': SECRET_DB_PORT
+		'HOST': SECRET_DB_HOST,
+		'PORT': SECRET_DB_PORT
     }
 }
 
@@ -131,3 +132,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+#Custom user model 
+#https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html
+AUTH_USER_MODEL = 'user.User'
