@@ -16,7 +16,7 @@ def year_choices():
 
 class Author(models.Model):
 	name  = models.CharField(max_length=45,blank=False,null=False)
-	books = models.ManyToManyField(Book,through='Publication')
+	books = models.ManyToManyField(Book, through='Publication', related_name='authors',related_query_name='author')
 
 	def __str__(self):
 		return self.name

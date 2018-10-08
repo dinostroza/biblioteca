@@ -15,6 +15,18 @@ class Book(models.Model):
 	extra     = models.CharField(max_length=256, blank=True, null=True)
 	index     = JSONField(blank=True, null=True)
 
+	@property
+	def matter(self):
+		return str(self.subject.matter)
+
+	def author_list(self):
+		author_list = self.authors.all()
+		str_author_list = ', '.join([a.name for a in author_list])
+		return str_author_list
+
+	author_list.short_description = "Authors"
+
+
 	def __str__(self):
 		return self.title
 	
@@ -33,7 +45,7 @@ class Editorial(models.Model):
 class StoragedBook(models.Model):
 	book = models.OneToOneField(Book, blank = False, null=False)
 	storeunit = models.ForeignKey(StorageUnit, blank = False, null=False)
-	date = models.DateTimeField(auto_now = True)
+	date = models.DateField()
 
 	def __str__(self):
 		return '%s: %s'%(self.storeunit,self.book)
@@ -56,7 +68,7 @@ class BookSubject(models.Model):
 	description = models.CharField(max_length=256, blank=True, null=True)
 	matter      = models.ForeignKey('BookMatter', blank=True, null=True)
 	def __str__(self):
-		return self.name
+		return '{} - {}'.format(self.matter, self.name)
 
 	class Meta:
 		db_table = 'booksubject'
@@ -69,4 +81,4 @@ class BookMatter(models.Model):
 		return self.name
 
 	class Meta:
-		db_table = 'bookmatter'	
+		db_table = 'bookmatter'
